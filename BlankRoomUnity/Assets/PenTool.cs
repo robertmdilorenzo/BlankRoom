@@ -8,17 +8,44 @@ public class PenTool : MonoBehaviour
     public float mouseSensitivity;
 
     private Vector3 offset;
+    float penZ;
     void Start()
     {
-        offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f));
+        penZ = Camera.main.ScreenToViewportPoint(gameObject.transform.position).z;
+        offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, penZ));
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.position = Camera.main.ScreenToViewportPoint(Input.mousePosition) + offset;
+        offset = gameObject.transform.position - GetMouseAsWorldPoint();
+        gameObject.transform.position = GetMouseAsWorldPoint() + offset;
          
 
     }
+
+    private Vector3 GetMouseAsWorldPoint()
+
+    {
+
+        // Pixel coordinates of mouse (x,y)
+
+        Vector3 mousePoint = Input.mousePosition;
+
+
+
+        // z coordinate of game object on screen
+
+        mousePoint.z = penZ;
+
+
+
+        // Convert it to world points
+
+        return Camera.main.ScreenToWorldPoint(mousePoint);
+
+    }
+
+
 }
