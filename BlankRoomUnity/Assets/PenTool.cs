@@ -5,21 +5,23 @@ using UnityEngine;
 public class PenTool : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float mouseSensitivity;
+    
 
     private Vector3 offset;
     float penZ;
     void Start()
     {
+        //gameObject.transform.position = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+
         penZ = Camera.main.ScreenToViewportPoint(gameObject.transform.position).z;
-        offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, penZ));
+        offset = gameObject.transform.position - GetMouseAsWorldPoint();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        offset = gameObject.transform.position - GetMouseAsWorldPoint();
+      
         gameObject.transform.position = GetMouseAsWorldPoint() + offset;
          
 
@@ -31,7 +33,7 @@ public class PenTool : MonoBehaviour
 
         // Pixel coordinates of mouse (x,y)
 
-        Vector3 mousePoint = Input.mousePosition;
+        Vector3 mousePoint = -Input.mousePosition;
 
 
 
@@ -45,6 +47,16 @@ public class PenTool : MonoBehaviour
 
         return Camera.main.ScreenToWorldPoint(mousePoint);
 
+    }
+
+    private void OnMouseDown()
+    {
+        gameObject.GetComponent<TrailRenderer>().enabled = true;
+    }
+
+    private void OnMouseUp()
+    {
+        gameObject.GetComponent<TrailRenderer>().enabled = false;
     }
 
 
