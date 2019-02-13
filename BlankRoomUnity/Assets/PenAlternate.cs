@@ -6,11 +6,11 @@ public class PenAlternate : MonoBehaviour
 {
     // Start is called before the first frame update
     float distance = 3;
-    TrailRenderer myTrail;
+    ParticleSystem myTrail;
     void Start()
     {
-        myTrail = gameObject.GetComponent<TrailRenderer>();
-        myTrail.enabled = false;
+        myTrail = gameObject.GetComponent<ParticleSystem>();
+        myTrail.Stop();
     }
 
     // Update is called once per frame
@@ -28,11 +28,11 @@ public class PenAlternate : MonoBehaviour
 
     private void OnMouseDown()
     {
-        myTrail.enabled = true;
+        myTrail.Play();
     }
 
     private void OnMouseUp()
     {
-        myTrail.enabled = false;
+        myTrail.Stop();
     }
 }
