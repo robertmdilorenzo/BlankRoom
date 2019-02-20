@@ -5,7 +5,7 @@ using UnityEngine;
 public class PenAlternate : MonoBehaviour
 {
     // Start is called before the first frame update
-    float distance = 3;
+    float distance = 5;
     ParticleSystem myTrail;
     public Transform uvLocation;
     Vector3 uvWorldPosition;
@@ -18,17 +18,20 @@ public class PenAlternate : MonoBehaviour
         myTrail = gameObject.GetComponent<ParticleSystem>();
       
         renderPenParticles = renderPen.GetComponent<ParticleSystem>();
-        //myTrail.Stop();
-        //renderPenParticles.Stop();
+       
+        canEmit(false);
     }
 
     // Update is called once per frame
     void Update()
     {
         ObjectFollowCursor();
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             DoAction();
+        } else if (Input.GetMouseButtonUp(0))
+        {
+            canEmit(false);
         }
     }
 
@@ -45,12 +48,7 @@ public class PenAlternate : MonoBehaviour
     {
         if (HitTestUVPosition(ref uvWorldPosition))
         {
-            //Debug.LogWarning("Hit successful");
-
-            //myTrail.emissionRate = 25;
-            //Debug.Log(myTrail.isPlaying);
-            //renderPenParticles.emissionRate = 25;
-            //GameObject.Find("RenderPen").transform.position = uvWorldPosition;
+            canEmit(true);
 
         } else
         {
@@ -85,6 +83,12 @@ public class PenAlternate : MonoBehaviour
         {
             return false;
         }
+    }
+
+    void canEmit(bool truefalse)
+    {
+        myTrail.enableEmission = truefalse;
+        renderPenParticles.enableEmission = truefalse;
     }
 
 

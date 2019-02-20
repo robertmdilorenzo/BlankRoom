@@ -15,18 +15,11 @@ public class WallWriting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonUp(0))
         {
             MergeTexture();
+            
         }
-    }
-    private void OnMouseDown()
-    {
-        MergeTexture();
-    }
-    private void OnMouseUp()
-    {
-        MergeTexture();
     }
 
     void MergeTexture()
@@ -42,10 +35,20 @@ public class WallWriting : MonoBehaviour
         RenderTexture.active = null;
         baseMaterial.mainTexture = tex;
         Debug.Log("Merge Complete!");
+        //StartCoroutine(SaveTextureFiles(tex));
     }
 
-    void SaveTexture()
+    IEnumerator SaveTextureFile(Texture2D savedTexture)
     {
-
+        string fullPath = System.IO.Directory.GetCurrentDirectory();
+        System.DateTime date = System.DateTime.Now;
+        string fileName = "CanvasTexture.png";
+        if (!System.IO.Directory.Exists(fullPath))
+        {
+            System.IO.Directory.CreateDirectory(fullPath);
+        }
+        var bytes = savedTexture.EncodeToPNG();
+        System.IO.File.WriteAllBytes(fullPath + fileName, bytes);
+        yield return null;
     }
 }
