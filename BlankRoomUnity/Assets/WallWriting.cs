@@ -17,12 +17,12 @@ public class WallWriting : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
-            MergeTexture();
             
+            StartCoroutine(SaveTextureFile(MergeTexture()));
         }
     }
 
-    void MergeTexture()
+    Texture2D MergeTexture()
     {
         Debug.Log("Merging...");
         RenderTexture.active = canvasTexture;
@@ -35,7 +35,8 @@ public class WallWriting : MonoBehaviour
         RenderTexture.active = null;
         baseMaterial.mainTexture = tex;
         Debug.Log("Merge Complete!");
-        //StartCoroutine(SaveTextureFiles(tex));
+        return tex;
+        
     }
 
     IEnumerator SaveTextureFile(Texture2D savedTexture)

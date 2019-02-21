@@ -49,6 +49,7 @@ public class PenAlternate : MonoBehaviour
         if (HitTestUVPosition(ref uvWorldPosition))
         {
             canEmit(true);
+            
 
         } else
         {
@@ -75,7 +76,7 @@ public class PenAlternate : MonoBehaviour
             //Debug.Log(pixelUV);
             uvWorldPosition.x = pixelUV.x;
             uvWorldPosition.y = pixelUV.y;
-            uvWorldPosition.z = -1.0f;
+            uvWorldPosition.z = 0.0f;
             return true;
 
         }
