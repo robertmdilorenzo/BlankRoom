@@ -14,7 +14,7 @@ public class SaveImage : MonoBehaviour
 
     public static void SaveTextureToFile(Texture2D texture, string filename)
     {
-        filename = System.IO.Directory.GetCurrentDirectory() + "Resources/" + filename;
+        filename = System.IO.Directory.GetCurrentDirectory() + "/Resources/" + filename;
         System.IO.File.WriteAllBytes(filename, texture.EncodeToPNG());
     }
 
@@ -24,7 +24,7 @@ public class SaveImage : MonoBehaviour
     {
         Texture2D textureToBeReturned;
         byte[] bytes;
-        bytes = System.IO.File.ReadAllBytes(System.IO.Directory.GetCurrentDirectory() + "Resources/" + filename);
+        bytes = System.IO.File.ReadAllBytes(System.IO.Directory.GetCurrentDirectory() + "/Resources/" + filename);
         textureToBeReturned = new Texture2D(1, 1);
         textureToBeReturned.LoadImage(bytes);
         return textureToBeReturned;
