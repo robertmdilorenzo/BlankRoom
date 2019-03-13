@@ -34,11 +34,12 @@ public class SaveImage : MonoBehaviour
         // Update is called once per frame
         void Update()
     {
-        
+        LoadWallImages("Room_1");
     }
 
     void LoadWallImages(string RoomName) {
-        wall1.GetComponent<Material>().mainTexture = Resources.Load(RoomName + "_1.png") as Texture2D;
+        
+        wall1.GetComponent<Renderer>().material.mainTexture = Resources.Load(RoomName + "_1.png") as Texture2D;
         //to be implemented: walls 2-4
     }
 }
