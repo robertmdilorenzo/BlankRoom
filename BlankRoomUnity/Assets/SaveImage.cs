@@ -38,7 +38,7 @@ public class SaveImage : MonoBehaviour
     }
 
     void LoadWallImages(string RoomName) {
-        wall1.GetComponent<Material>().mainTexture = Resources.Load(RoomName + "_1.png");
+        wall1.GetComponent<Material>().mainTexture = Resources.Load(RoomName + "_1.png") as Texture2D;
         //to be implemented: walls 2-4
     }
 }
