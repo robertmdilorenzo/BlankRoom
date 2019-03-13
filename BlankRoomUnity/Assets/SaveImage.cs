@@ -15,7 +15,7 @@ public class SaveImage : MonoBehaviour
 
     public static void SaveTextureToFile(Texture2D texture, string filename)
     {
-        filename = System.IO.Directory.GetCurrentDirectory() + "/Resources/" + filename;
+        filename = System.IO.Directory.GetCurrentDirectory() + "/Assets/Resources/" + filename;
         System.IO.File.WriteAllBytes(filename, texture.EncodeToPNG());
     }
 
