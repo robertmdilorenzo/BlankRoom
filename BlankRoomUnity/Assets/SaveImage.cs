@@ -9,6 +9,7 @@ public class SaveImage : MonoBehaviour
     void Start()
     {
         wall1 = GameObject.Find("Plane") as GameObject;
+        LoadWallImages("Room_1"); 
         //to be implemented, walls 2-4
     }
 
@@ -37,7 +38,7 @@ public class SaveImage : MonoBehaviour
     }
 
     void LoadWallImages(string RoomName) {
-        wall1.GetComponent<Material>().mainTexture = Resources.Load(RoomName + "_1");
+        wall1.GetComponent<Material>().mainTexture = Resources.Load(RoomName + "_1.png");
         //to be implemented: walls 2-4
     }
 }
