@@ -25,7 +25,7 @@ public class SaveImage : MonoBehaviour
     {
         Texture2D textureToBeReturned;
         byte[] bytes;
-        bytes = System.IO.File.ReadAllBytes(System.IO.Directory.GetCurrentDirectory() + "/Resources/" + filename);
+        bytes = System.IO.File.ReadAllBytes(System.IO.Directory.GetCurrentDirectory() + "/Assets/Resources/" + filename);
         textureToBeReturned = new Texture2D(1, 1);
         textureToBeReturned.LoadImage(bytes);
         return textureToBeReturned;
@@ -38,8 +38,9 @@ public class SaveImage : MonoBehaviour
     }
 
     void LoadWallImages(string RoomName) {
-        
-        wall1.GetComponent<Renderer>().material.mainTexture = Resources.Load(RoomName + "_1.png") as Texture2D;
+
+        wall1.GetComponent<Renderer>().material.mainTexture = LoadTextureFromFile(RoomName + "_1.png");
+        //wall1.GetComponent<Renderer>().material.mainTexture = Resources.Load(RoomName + "_1.png") as Texture2D;
         //to be implemented: walls 2-4
     }
 }
