@@ -16,7 +16,12 @@ public class RoomSavingClass : MonoBehaviour
     public string getWall4() { return Wall4Location; }
     //getter for location
 
-
+    public string GetImageFolder() {
+        string path = System.IO.Directory.GetCurrentDirectory();
+        if(!System.IO.Directory.Exists(path)){
+            System.IO.Directory.CreateDirectory(path);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
