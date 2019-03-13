@@ -8,7 +8,7 @@ public class SaveImage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        wall1 = GameObject.Find("plane") as GameObject;
+        wall1 = GameObject.Find("Plane") as GameObject;
         //to be implemented, walls 2-4
     }
 
@@ -19,7 +19,7 @@ public class SaveImage : MonoBehaviour
     }
 
     Texture2D load_s01_texture;
-    https://answers.unity.com/questions/858245/save-and-load-texture-with-systemio-filestream.html
+   //https://answers.unity.com/questions/858245/save-and-load-texture-with-systemio-filestream.html
     public Texture2D LoadTextureFromFile(string filename)
     {
         Texture2D textureToBeReturned;
