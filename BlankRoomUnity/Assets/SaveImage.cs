@@ -13,6 +13,15 @@ public class SaveImage : MonoBehaviour
         //to be implemented, walls 2-4
     }
 
+    
+    public static void SaveWallTextureAsPNG(GameObject wall, string filename) {
+        SaveTextureToFile(GetWallTexture(wall), filename);
+    }
+
+    public static Texture2D GetWallTexture(GameObject wall) {
+        return wall.GetComponent<Renderer>().material.mainTexture;
+    }
+
     public static void SaveTextureToFile(Texture2D texture, string filename)
     {
         filename = System.IO.Directory.GetCurrentDirectory() + "/Assets/Resources/" + filename;
