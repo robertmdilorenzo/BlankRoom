@@ -7,6 +7,7 @@ public class WallWriting : MonoBehaviour
     // Start is called before the first frame update
     public RenderTexture canvasTexture;
     public Material baseMaterial;
+    public GameObject penMarkContainer;
     void Start()
     {
         
@@ -24,6 +25,7 @@ public class WallWriting : MonoBehaviour
 
     Texture2D MergeTexture()
     {
+
         Debug.Log("Merging...");
         RenderTexture.active = canvasTexture;
         int width = canvasTexture.width;
@@ -35,6 +37,11 @@ public class WallWriting : MonoBehaviour
         RenderTexture.active = null;
         baseMaterial.mainTexture = tex;
         Debug.Log("Merge Complete!");
+
+        for(int i = 0; i < penMarkContainer.transform.childCount; i++)
+        {
+            Destroy(penMarkContainer.transform.GetChild(i).gameObject);
+        }
         return tex;
         
     }

@@ -13,6 +13,7 @@ public class PenAlternate : MonoBehaviour
     ParticleSystem renderPenParticles;
     public Camera myCanvasCam;
     public RenderTexture renderTexture;
+    public GameObject penMarkContainer;
     void Start()
     {
         
@@ -57,10 +58,10 @@ public class PenAlternate : MonoBehaviour
             GameObject brush;
             brush = (GameObject)Instantiate(Resources.Load("PaintBrushSprite"));
             //renderPen.transform.localPosition = new Vector3(-uvWorldPosition.x, -uvWorldPosition.y);
-            //brush.transform.parent = brushContainer.transform; //Add the brush to our container to be wiped later
+            
             brush.transform.localPosition = uvWorldPosition; //The position of the brush (in the UVMap)
             brush.transform.localScale = Vector3.one;//The size of the brush
-
+            brush.transform.parent = penMarkContainer.transform; //Add the brush to our container to be wiped later
 
         } else
         {

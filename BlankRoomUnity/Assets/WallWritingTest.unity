@@ -387,6 +387,36 @@ PrefabInstance:
     - {fileID: 6227554828322840189, guid: 2e5a3cb226db44f4ebe1da2e2227f784, type: 3}
     - {fileID: 6227554828322840184, guid: 2e5a3cb226db44f4ebe1da2e2227f784, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2e5a3cb226db44f4ebe1da2e2227f784, type: 3}
+--- !u!1 &871174468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 871174469}
+  m_Layer: 0
+  m_Name: Pen Container
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &871174469
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 871174468}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 10.096033, y: 3.7677336, z: -17.082195}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1009038537 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6227554828322840182, guid: 2e5a3cb226db44f4ebe1da2e2227f784,
@@ -407,6 +437,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasTexture: {fileID: 8400000, guid: cf004f5d4ef02ca409e5def30ed0ce79, type: 2}
   baseMaterial: {fileID: 2100000, guid: 36ae72043807a264fba19225c832c109, type: 2}
+  penMarkContainer: {fileID: 871174468}
 --- !u!1 &1353439984
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,6 +870,11 @@ PrefabInstance:
       propertyPath: renderTexture
       value: 
       objectReference: {fileID: 8400000, guid: cf004f5d4ef02ca409e5def30ed0ce79, type: 2}
+    - target: {fileID: 6227554828322840189, guid: 2e5a3cb226db44f4ebe1da2e2227f784,
+        type: 3}
+      propertyPath: penMarkContainer
+      value: 
+      objectReference: {fileID: 871174468}
     - target: {fileID: 6227554828322840183, guid: 2e5a3cb226db44f4ebe1da2e2227f784,
         type: 3}
       propertyPath: m_SortingFudge
