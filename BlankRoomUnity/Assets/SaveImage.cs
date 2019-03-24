@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class SaveImage : MonoBehaviour
 {
-    public GameObject wall1, wall2, wall3, wall4;
+    public GameObject wall1, wall2, wall3, wall4, player;
     // Start is called before the first frame update
     void Start()
     {
         wall1 = GameObject.Find("Plane") as GameObject;
-        LoadWallImages("Room_1"); 
+        LoadWallImages("Room_1");
+        player = GameObject.Find("player") as GameObject;
+        LoadPlayerPosition(player);
         //to be implemented, walls 2-4
     }
 
+    public static void LoadPlayerPosition(GameObject player) {
+
+    }
+
+    public static void SavePlayerPosition(GameObject player, string filename) {
+
+    }
     
     public static void SaveWallTextureAsPNG(GameObject wall, string filename) {
         SaveTextureToFile(GetWallTexture(wall), filename);
