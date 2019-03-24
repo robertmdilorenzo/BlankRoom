@@ -19,16 +19,16 @@ public class SaveImage : MonoBehaviour
     }
 
     //filename argument should be name of room
-    public static void SaveAllData(string filename) {
-        SavePlayerPosition(player, filename);
-        SaveAllWalls(filename);
+    public static void SaveAllData(string RoomName) {
+        SavePlayerPosition(player, RoomName);
+        SaveAllWalls(RoomName);
     }
 
     //filename argument should be name of room
-    public static void LoadAllData(string filename)
+    public static void LoadAllData(string RoomName)
     {
-        LoadPlayerPosition(player, filename);
-        LoadWallImages(filename);
+        LoadPlayerPosition(player, RoomName);
+        LoadWallImages(RoomName);
     }
 
     public static void LoadPlayerPosition(GameObject player, string filename) {
