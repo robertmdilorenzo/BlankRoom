@@ -10,9 +10,9 @@ public class SaveImage : MonoBehaviour
     void Start()
     {
         wall1 = GameObject.Find("Plane") as GameObject;
-        //wall2 = GameObject.Find("Plane") as GameObject;
-        //wall3 = GameObject.Find("Plane") as GameObject;
-        //wall4 = GameObject.Find("Plane") as GameObject;
+        //wall2 = GameObject.Find("Plane2") as GameObject;
+        //wall3 = GameObject.Find("Plane3") as GameObject;
+        //wall4 = GameObject.Find("Plane4") as GameObject;
         player = GameObject.Find("player") as GameObject;
         LoadWallImages("Room_1");
         
