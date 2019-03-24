@@ -16,7 +16,8 @@ public class SaveImage : MonoBehaviour
         wall4 = GameObject.Find("Plane4") as GameObject;
         player = GameObject.Find("player") as GameObject;
         LoadWallImages("Room_1");
-        GetRoomNames();//testing
+        //GetRoomNames();//testing
+        DeleteRoom("TestSave");
         
     }
 
@@ -61,6 +62,31 @@ public class SaveImage : MonoBehaviour
         //end of testing
 
         return fileNames; 
+    }
+
+    public static void DeleteRoom(string RoomName)
+    {
+        string curDirectory = System.IO.Directory.GetCurrentDirectory() + "/Assets/Resources/";
+        string wallName = curDirectory + RoomName + "_1.png";
+        string wallNameMeta = wallName + ".meta";
+        System.IO.File.Delete(@wallNameMeta);
+        System.IO.File.Delete(@wallName);
+        wallName = curDirectory + RoomName + "_2.png";
+        wallNameMeta = wallName + ".meta";
+        System.IO.File.Delete(@wallNameMeta);
+        System.IO.File.Delete(@wallName);
+        wallName = curDirectory + RoomName + "_3.png";
+        wallNameMeta = wallName + ".meta";
+        System.IO.File.Delete(@wallNameMeta);
+        System.IO.File.Delete(@wallName);
+        wallName = curDirectory + RoomName + "_4.png";
+        wallNameMeta = wallName + ".meta";
+        System.IO.File.Delete(@wallNameMeta);
+        System.IO.File.Delete(@wallName);
+        wallName = curDirectory + RoomName + "_Player";
+        wallNameMeta = wallName + ".meta";
+        System.IO.File.Delete(@wallNameMeta);
+        System.IO.File.Delete(@wallName);
     }
 
     public static void LoadPlayerPosition(GameObject player, string filename) {
