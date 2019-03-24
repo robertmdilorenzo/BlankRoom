@@ -10,9 +10,9 @@ public class SaveImage : MonoBehaviour
     void Start()
     {
         wall1 = GameObject.Find("Plane") as GameObject;
-        //wall2 = GameObject.Find("Plane2") as GameObject;
-        //wall3 = GameObject.Find("Plane3") as GameObject;
-        //wall4 = GameObject.Find("Plane4") as GameObject;
+        wall2 = GameObject.Find("Plane2") as GameObject;
+        wall3 = GameObject.Find("Plane3") as GameObject;
+        wall4 = GameObject.Find("Plane4") as GameObject;
         player = GameObject.Find("player") as GameObject;
         LoadWallImages("Room_1");
         
@@ -68,9 +68,9 @@ public class SaveImage : MonoBehaviour
 
     public static void SaveAllWalls(string filename) {
         SaveWallTextureAsPNG(wall1, filename);
-        //SaveWallTextureAsPNG(wall2, filename);
-        //SaveWallTextureAsPNG(wall3, filename);
-        //SaveWallTextureAsPNG(wall4, filename);
+        SaveWallTextureAsPNG(wall2, filename);
+        SaveWallTextureAsPNG(wall3, filename);
+        SaveWallTextureAsPNG(wall4, filename);
     }
 
     public static void SaveWallTextureAsPNG(GameObject wall, string filename) {
@@ -102,8 +102,8 @@ public class SaveImage : MonoBehaviour
     public static void LoadWallImages(string RoomName) {
 
         wall1.GetComponent<Renderer>().material.mainTexture = LoadTextureFromFile(RoomName + "_1.png");
-        //wall2.GetComponent<Renderer>().material.mainTexture = LoadTextureFromFile(RoomName + "_2.png");
-        //wall3.GetComponent<Renderer>().material.mainTexture = LoadTextureFromFile(RoomName + "_3.png");
-        //wall4.GetComponent<Renderer>().material.mainTexture = LoadTextureFromFile(RoomName + "_4.png");
+        wall2.GetComponent<Renderer>().material.mainTexture = LoadTextureFromFile(RoomName + "_2.png");
+        wall3.GetComponent<Renderer>().material.mainTexture = LoadTextureFromFile(RoomName + "_3.png");
+        wall4.GetComponent<Renderer>().material.mainTexture = LoadTextureFromFile(RoomName + "_4.png");
     }
 }
