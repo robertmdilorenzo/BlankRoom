@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class SaveImage : MonoBehaviour
@@ -20,6 +21,10 @@ public class SaveImage : MonoBehaviour
     }
 
     public static void SavePlayerPosition(GameObject player, string filename) {
+        filename = "Room_1_Player"; //Testing Line, name will not be hard coded in full version
+        //FileStream fs = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
+        filename = System.IO.Directory.GetCurrentDirectory() + "/Assets/Resources/" + filename;
+        StreamWriter sw = new StreamWriter(filename);
 
     }
     
