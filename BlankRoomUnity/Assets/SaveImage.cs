@@ -12,6 +12,7 @@ public class SaveImage : MonoBehaviour
         wall1 = GameObject.Find("Plane") as GameObject;
         LoadWallImages("Room_1");
         player = GameObject.Find("player") as GameObject;
+        //SaveAllWalls("TestSave");
         //LoadPlayerPosition(player, "Room_1_Player");
         //SavePlayerPosition(player, "Room_1_Player");
         //to be implemented, walls 2-4
@@ -67,7 +68,7 @@ public class SaveImage : MonoBehaviour
     }
 
     public static void SaveWallTextureAsPNG(GameObject wall, string filename) {
-        SaveTextureToFile(GetWallTexture(wall), filename);
+        SaveTextureToFile(GetWallTexture(wall), filename+".png");
     }
 
     public static Texture2D GetWallTexture(GameObject wall) {
