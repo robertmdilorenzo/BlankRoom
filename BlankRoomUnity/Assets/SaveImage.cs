@@ -10,12 +10,18 @@ public class SaveImage : MonoBehaviour
     void Start()
     {
         wall1 = GameObject.Find("Plane") as GameObject;
-        LoadWallImages("Room_1");
+        //wall2 = GameObject.Find("Plane") as GameObject;
+        //wall3 = GameObject.Find("Plane") as GameObject;
+        //wall4 = GameObject.Find("Plane") as GameObject;
         player = GameObject.Find("player") as GameObject;
-        //SaveAllWalls("TestSave");
-        //LoadPlayerPosition(player, "Room_1_Player");
-        //SavePlayerPosition(player, "Room_1_Player");
-        //to be implemented, walls 2-4
+        LoadWallImages("Room_1");
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
     }
 
     //filename argument should be name of room
@@ -91,12 +97,6 @@ public class SaveImage : MonoBehaviour
         textureToBeReturned = new Texture2D(1, 1);
         textureToBeReturned.LoadImage(bytes);
         return textureToBeReturned;
-    }
-
-        // Update is called once per frame
-        void Update()
-    {
-        LoadWallImages("Room_1");
     }
 
     public static void LoadWallImages(string RoomName) {
