@@ -12,20 +12,38 @@ public class SaveImage : MonoBehaviour
         wall1 = GameObject.Find("Plane") as GameObject;
         LoadWallImages("Room_1");
         player = GameObject.Find("player") as GameObject;
-        LoadPlayerPosition(player);
+        LoadPlayerPosition(player, "Room_1_Player");
+        //SavePlayerPosition(player, "Room_1_Player");
         //to be implemented, walls 2-4
     }
 
-    public static void LoadPlayerPosition(GameObject player) {
+    public static void LoadPlayerPosition(GameObject player, string filename) {
+        filename = "Room_1_Player"; //name will not be hard coded in full version
+        filename = System.IO.Directory.GetCurrentDirectory() + "/Assets/Resources/" + filename;
+        StreamReader sr = new StreamReader(filename);
 
+        Vector3 pos = new Vector3(float.Parse(sr.ReadLine()), float.Parse(sr.ReadLine()), float.Parse(sr.ReadLine()));
+        player.transform.position = pos;
+  
+        Vector3 rot = new Vector3(float.Parse(sr.ReadLine()), float.Parse(sr.ReadLine()), float.Parse(sr.ReadLine()));
+        player.transform.rotation = Quaternion.Euler(rot.x, rot.y, rot.z); ;
+
+        sr.Close();
     }
 
     public static void SavePlayerPosition(GameObject player, string filename) {
         filename = "Room_1_Player"; //Testing Line, name will not be hard coded in full version
-        //FileStream fs = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
         filename = System.IO.Directory.GetCurrentDirectory() + "/Assets/Resources/" + filename;
         StreamWriter sw = new StreamWriter(filename);
+        Transform pt = player.transform;
+        sw.Write(pt.position.x + "\n");
+        sw.Write(pt.position.y + "\n");
+        sw.Write(pt.position.z + "\n");
+        sw.Write(pt.rotation.x + "\n");
+        sw.Write(pt.rotation.y + "\n");
+        sw.Write(pt.rotation.z + "\n");
 
+        sw.Close();
     }
     
     public static void SaveWallTextureAsPNG(GameObject wall, string filename) {
