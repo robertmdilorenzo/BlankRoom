@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class SaveImage : MonoBehaviour
@@ -15,6 +16,7 @@ public class SaveImage : MonoBehaviour
         wall4 = GameObject.Find("Plane4") as GameObject;
         player = GameObject.Find("player") as GameObject;
         LoadWallImages("Room_1");
+        GetRoomNames();//testing
         
     }
 
@@ -35,6 +37,30 @@ public class SaveImage : MonoBehaviour
     {
         LoadPlayerPosition(player, RoomName);
         LoadWallImages(RoomName);
+    }
+
+    public static string[] GetRoomNames()
+    {
+        string curDirectory = System.IO.Directory.GetCurrentDirectory() + "/Assets/Resources";
+        string[] fileNames = Directory.GetFiles(curDirectory, "*_Player");
+        Regex pattern = new Regex(".*Resources.{1}");
+        for (int i = 0; i < fileNames.Length; i++)
+        {
+            //Remove .Player from file names
+            fileNames[i] = fileNames[i].Replace("_Player", "");
+            fileNames[i] = pattern.Replace(fileNames[i], "");
+        }
+
+        //testing
+        StreamWriter sw = new StreamWriter(curDirectory + "/TestFileNames.txt");
+        for (int i = 0; i < fileNames.Length; i++)
+        {
+            sw.Write(fileNames[i]);
+        }
+        sw.Close();
+        //end of testing
+
+        return fileNames; 
     }
 
     public static void LoadPlayerPosition(GameObject player, string filename) {
