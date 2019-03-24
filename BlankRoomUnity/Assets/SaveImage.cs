@@ -17,7 +17,6 @@ public class SaveImage : MonoBehaviour
         player = GameObject.Find("player") as GameObject;
         LoadWallImages("Room_1");
         //GetRoomNames();//testing
-        DeleteRoom("TestSave");
         
     }
 
@@ -157,5 +156,13 @@ public class SaveImage : MonoBehaviour
         wall2.GetComponent<Renderer>().material.mainTexture = LoadTextureFromFile(RoomName + "_2.png");
         wall3.GetComponent<Renderer>().material.mainTexture = LoadTextureFromFile(RoomName + "_3.png");
         wall4.GetComponent<Renderer>().material.mainTexture = LoadTextureFromFile(RoomName + "_4.png");
+    }
+
+    public static void MakeWallsBlank()
+    {
+        wall1.GetComponent<Renderer>().material.mainTexture = LoadTextureFromFile("BlankWallTexture.png");
+        wall2.GetComponent<Renderer>().material.mainTexture = LoadTextureFromFile("BlankWallTexture.png");
+        wall3.GetComponent<Renderer>().material.mainTexture = LoadTextureFromFile("BlankWallTexture.png");
+        wall4.GetComponent<Renderer>().material.mainTexture = LoadTextureFromFile("BlankWallTexture.png");
     }
 }
