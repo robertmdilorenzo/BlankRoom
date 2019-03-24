@@ -5,16 +5,29 @@ using UnityEngine;
 
 public class SaveImage : MonoBehaviour
 {
-    public GameObject wall1, wall2, wall3, wall4, player;
+    public static GameObject wall1, wall2, wall3, wall4, player;
     // Start is called before the first frame update
     void Start()
     {
         wall1 = GameObject.Find("Plane") as GameObject;
         LoadWallImages("Room_1");
         player = GameObject.Find("player") as GameObject;
-        LoadPlayerPosition(player, "Room_1_Player");
+        //LoadPlayerPosition(player, "Room_1_Player");
         //SavePlayerPosition(player, "Room_1_Player");
         //to be implemented, walls 2-4
+    }
+
+    //filename argument should be name of room
+    public static void SaveAllData(string filename) {
+        SavePlayerPosition(player, filename);
+        SaveAllWalls(filename);
+    }
+
+    //filename argument should be name of room
+    public static void LoadAllData(string filename)
+    {
+        LoadPlayerPosition(player, filename);
+        LoadWallImages(filename);
     }
 
     public static void LoadPlayerPosition(GameObject player, string filename) {
@@ -45,10 +58,16 @@ public class SaveImage : MonoBehaviour
 
         sw.Close();
     }
-    
+
+    public static void SaveAllWalls(string filename) {
+        SaveWallTextureAsPNG(wall1, filename);
+        //SaveWallTextureAsPNG(wall2, filename);
+        //SaveWallTextureAsPNG(wall3, filename);
+        //SaveWallTextureAsPNG(wall4, filename);
+    }
+
     public static void SaveWallTextureAsPNG(GameObject wall, string filename) {
         SaveTextureToFile(GetWallTexture(wall), filename);
-        //must pass first argument as Texture2D
     }
 
     public static Texture2D GetWallTexture(GameObject wall) {
@@ -63,7 +82,7 @@ public class SaveImage : MonoBehaviour
 
     Texture2D load_s01_texture;
    //https://answers.unity.com/questions/858245/save-and-load-texture-with-systemio-filestream.html
-    public Texture2D LoadTextureFromFile(string filename)
+    public static Texture2D LoadTextureFromFile(string filename)
     {
         Texture2D textureToBeReturned;
         byte[] bytes;
@@ -79,10 +98,11 @@ public class SaveImage : MonoBehaviour
         LoadWallImages("Room_1");
     }
 
-    void LoadWallImages(string RoomName) {
+    public static void LoadWallImages(string RoomName) {
 
         wall1.GetComponent<Renderer>().material.mainTexture = LoadTextureFromFile(RoomName + "_1.png");
-        //wall1.GetComponent<Renderer>().material.mainTexture = Resources.Load(RoomName + "_1.png") as Texture2D;
-        //to be implemented: walls 2-4
+        //wall2.GetComponent<Renderer>().material.mainTexture = LoadTextureFromFile(RoomName + "_2.png");
+        //wall3.GetComponent<Renderer>().material.mainTexture = LoadTextureFromFile(RoomName + "_3.png");
+        //wall4.GetComponent<Renderer>().material.mainTexture = LoadTextureFromFile(RoomName + "_4.png");
     }
 }
