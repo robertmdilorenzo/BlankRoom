@@ -26,13 +26,17 @@ public class SaveImage : MonoBehaviour
 
     }
 
-    //filename argument should be name of room
+    public static void CreateNewRoom(string RoomName)
+    {
+        MakeWallsBlank();
+        SaveAllData(RoomName);
+    }
+
     public static void SaveAllData(string RoomName) {
         SavePlayerPosition(player, RoomName);
         SaveAllWalls(RoomName);
     }
-
-    //filename argument should be name of room
+    
     public static void LoadAllData(string RoomName)
     {
         LoadPlayerPosition(player, RoomName);
