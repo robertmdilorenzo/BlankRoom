@@ -67,6 +67,16 @@ public class SaveImage : MonoBehaviour
         return fileNames; 
     }
 
+    public static bool RoomNameExists(string RoomName)
+    {
+        string[] names = GetRoomNames();
+        foreach (string name in names)
+        {
+            if (RoomName.Equals(name)) return true;
+        }
+        return false;
+    }
+
     public static void DeleteRoom(string RoomName)
     {
         string curDirectory = System.IO.Directory.GetCurrentDirectory() + "/Assets/Resources/";
