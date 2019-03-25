@@ -7,6 +7,9 @@ using UnityEngine;
 
 public class SaveImage : MonoBehaviour
 {
+
+    //mycanvas.transform.Find("name").gameObject.SetActive(true);
+
     public static GameObject wall1, wall2, wall3, wall4, player;
     public static string currentRoomName;
     // Start is called before the first frame update
