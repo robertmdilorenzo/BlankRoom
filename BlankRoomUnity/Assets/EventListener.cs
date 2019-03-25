@@ -19,6 +19,7 @@ public class EventListener : MonoBehaviour {
   }
     public void OnGrab() {
         Transform pointerTransform = GvrPointerInputModule.Pointer.PointerTransform;
+       
         transform.SetParent(pointerTransform, true);
     }
     public void OnRelease() {
