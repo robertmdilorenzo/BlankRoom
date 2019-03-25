@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
@@ -64,6 +65,7 @@ public class SaveImage : MonoBehaviour
         sw.Close();
         //end of testing
 
+        Array.Sort(fileNames);
         return fileNames; 
     }
 
