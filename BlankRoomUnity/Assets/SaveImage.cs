@@ -12,9 +12,12 @@ public class SaveImage : MonoBehaviour
 
     public static GameObject wall1, wall2, wall3, wall4, player;
     public static string currentRoomName;
+    //public static SaveImage thisObject { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
+        //thisObject = this;
         wall1 = GameObject.Find("Plane") as GameObject;
         wall2 = GameObject.Find("Plane2") as GameObject;
         wall3 = GameObject.Find("Plane3") as GameObject;
