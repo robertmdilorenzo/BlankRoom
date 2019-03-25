@@ -8,6 +8,7 @@ using UnityEngine;
 public class SaveImage : MonoBehaviour
 {
     public static GameObject wall1, wall2, wall3, wall4, player;
+    public static string currentRoomName;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,12 +37,14 @@ public class SaveImage : MonoBehaviour
     public static void SaveAllData(string RoomName) {
         SavePlayerPosition(player, RoomName);
         SaveAllWalls(RoomName);
+        currentRoomName = RoomName;
     }
     
     public static void LoadAllData(string RoomName)
     {
         LoadPlayerPosition(player, RoomName);
         LoadWallImages(RoomName);
+        currentRoomName = RoomName;
     }
 
     public static string[] GetRoomNames()
