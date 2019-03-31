@@ -20,7 +20,7 @@ public class SaveImage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentRoomName = "Room_1";
+        currentRoomName = "NewRoom";
 
         wall1 = GameObject.Find("Plane") as GameObject;
         wall2 = GameObject.Find("Plane2") as GameObject;
@@ -36,11 +36,7 @@ public class SaveImage : MonoBehaviour
         loadButtonText = loadButton.transform.Find("Text").gameObject;
         deleteButton = DeleteRoomPanel.transform.Find("DeleteButton").gameObject;
         deleteButtonText = deleteButton.transform.Find("Text").gameObject;
-        LoadWallImages("Room_1");
-        
-        
-        //GetRoomNames();//testing
-        
+        gameObject.GetComponent<SaveImage>().MakeWallsBlank();
     }
 
     public void LoadCreateNewRoomPanel()
