@@ -21,7 +21,7 @@ public class SaveImage : MonoBehaviour
     void Start()
     {
         currentRoomName = "NewRoom";
-
+        RoomListIter = 0;
         wall1 = GameObject.Find("Plane") as GameObject;
         wall2 = GameObject.Find("Plane2") as GameObject;
         wall3 = GameObject.Find("Plane3") as GameObject;
@@ -54,7 +54,7 @@ public class SaveImage : MonoBehaviour
     public void LoadDeleteRoomPanel()
     {
         currentRoomNameList = gameObject.GetComponent<SaveImage>().GetRoomNames();
-        RoomListIter = 0;
+        gameObject.GetComponent<SaveImage>().ValidateRoomListIter();
         MainPanel.SetActive(false);
         DeleteRoomPanel.SetActive(true);
         if (currentRoomNameList.Length < 1)
@@ -63,14 +63,14 @@ public class SaveImage : MonoBehaviour
         }
         else
         {
-            deleteButtonText.GetComponent<Text>().text = currentRoomNameList[0];
+            deleteButtonText.GetComponent<Text>().text = currentRoomNameList[RoomListIter];
         }
     }
 
     public void LoadLoadRoomPanel()
     {
         currentRoomNameList = gameObject.GetComponent<SaveImage>().GetRoomNames();
-        RoomListIter = 0;
+        gameObject.GetComponent<SaveImage>().ValidateRoomListIter();
         MainPanel.SetActive(false);
         LoadRoomPanel.SetActive(true);
         if (currentRoomNameList.Length < 1)
@@ -79,7 +79,7 @@ public class SaveImage : MonoBehaviour
         }
         else
         {
-            loadButtonText.GetComponent<Text>().text = currentRoomNameList[0];
+            loadButtonText.GetComponent<Text>().text = currentRoomNameList[RoomListIter];
         }
 
     }
@@ -144,6 +144,11 @@ public class SaveImage : MonoBehaviour
     public void SaveRoomOnClick()
     {
         gameObject.GetComponent<SaveImage>().SaveAllData(currentRoomName);
+    }
+
+    private void ValidateRoomListIter()
+    {
+        if (RoomListIter < 0 || RoomListIter >= currentRoomNameList.Length) RoomListIter = 0;
     }
 
     public void LoadButtonOnClick()
