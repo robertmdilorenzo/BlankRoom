@@ -13,7 +13,9 @@ public class SaveImage : MonoBehaviour
 
     public GameObject wall1, wall2, wall3, wall4, player, MainPanel, CreateRoomPanel, SaveCopyPanel, LoadRoomPanel, DeleteRoomPanel;
     public string currentRoomName;
-    public GameObject canvas;
+    public GameObject canvas, loadButton, deleteButton, loadButtonText, deleteButtonText;
+    public string[] currentRoomNameList;
+    private int RoomListIter;
 
     // Start is called before the first frame update
     void Start()
@@ -30,10 +32,14 @@ public class SaveImage : MonoBehaviour
         SaveCopyPanel = canvas.transform.Find("Save Copy Panel").gameObject;
         LoadRoomPanel = canvas.transform.Find("Load Room Panel").gameObject;
         DeleteRoomPanel = canvas.transform.Find("Delete Room Panel").gameObject;
+        loadButton = LoadRoomPanel.transform.Find("LoadButton").gameObject;
+        loadButtonText = loadButton.transform.Find("Text").gameObject;
+        deleteButton = DeleteRoomPanel.transform.Find("DeleteButton").gameObject;
+        deleteButtonText = deleteButton.transform.Find("Text").gameObject;
         LoadWallImages("Room_1");
         
         
-        //GetRoomNames();//testing
+        GetRoomNames();//testing
         
     }
 
@@ -51,14 +57,35 @@ public class SaveImage : MonoBehaviour
 
     public void LoadDeleteRoomPanel()
     {
+        currentRoomNameList = gameObject.GetComponent<SaveImage>().GetRoomNames();
+        RoomListIter = 0;
         MainPanel.SetActive(false);
         DeleteRoomPanel.SetActive(true);
+        if (currentRoomNameList.Length < 1)
+        {
+            deleteButtonText.GetComponent<Text>().text = "No Rooms";
+        }
+        else
+        {
+            deleteButtonText.GetComponent<Text>().text = currentRoomNameList[0];
+        }
     }
 
     public void LoadLoadRoomPanel()
     {
+        currentRoomNameList = gameObject.GetComponent<SaveImage>().GetRoomNames();
+        RoomListIter = 0;
         MainPanel.SetActive(false);
         LoadRoomPanel.SetActive(true);
+        if (currentRoomNameList.Length < 1)
+        {
+            loadButtonText.GetComponent<Text>().text = "No Rooms";
+        }
+        else
+        {
+            loadButtonText.GetComponent<Text>().text = currentRoomNameList[0];
+        }
+
     }
 
     public void BackToMainPanel()
@@ -97,10 +124,111 @@ public class SaveImage : MonoBehaviour
         }
     }
 
+    public void SaveAsOnClick()
+    {
+        string input_string = SaveCopyPanel.transform.Find("Input").Find("Text").gameObject.GetComponent<Text>().text;
+        if (input_string.Equals(""))
+        {
+            SaveCopyPanel.transform.Find("ErrorText").gameObject.GetComponent<Text>().text = "Input a Name";
+            return;
+        }
+        else if (RoomNameExists(input_string))
+        {
+            SaveCopyPanel.transform.Find("ErrorText").gameObject.GetComponent<Text>().text = "Name Exists, Choose Another";
+            return;
+        }
+        else
+        {
+            SaveAllData(input_string);
+            gameObject.GetComponent<SaveImage>().BackToMainPanel();
+            return;
+        }
+    }
+
     public void SaveRoomOnClick()
     {
+        gameObject.GetComponent<SaveImage>().SaveAllData(currentRoomName);
+    }
+
+    public void LoadButtonOnClick()
+    {
+        if (currentRoomNameList.Length < 1) return;
+
+        gameObject.GetComponent<SaveImage>().LoadAllData(loadButtonText.GetComponent<Text>().text);
+        gameObject.GetComponent<SaveImage>().BackToMainPanel();
 
     }
+
+    public void LoadUpButtonOnClick()
+    {
+        if(RoomListIter == 0)
+        {
+            return;
+        }
+        else
+        {
+            loadButtonText.GetComponent<Text>().text = currentRoomNameList[--RoomListIter];
+        }
+    }
+
+    public void LoadDownButtonOnClick()
+    {
+        if(RoomListIter == currentRoomNameList.Length - 1)
+        {
+            return;
+        }
+        else
+        {
+            loadButtonText.GetComponent<Text>().text = currentRoomNameList[++RoomListIter];
+        }
+    }
+
+    public void DeleteButtonOnClick()
+    {
+        if (currentRoomNameList.Length < 1) return;
+
+        gameObject.GetComponent<SaveImage>().DeleteRoom(deleteButtonText.GetComponent<Text>().text);
+        gameObject.GetComponent<SaveImage>().BackToMainPanel();
+    }
+
+    public void DeleteUpButtonOnClick()
+    {
+        if (RoomListIter == 0)
+        {
+            return;
+        }
+        else
+        {
+            deleteButtonText.GetComponent<Text>().text = currentRoomNameList[--RoomListIter];
+        }
+    }
+
+    public void DeleteDownButtonOnClick()
+    {
+        if(RoomListIter == currentRoomNameList.Length - 1)
+        {
+            return;
+        }
+        else
+        {
+            deleteButtonText.GetComponent<Text>().text = currentRoomNameList[++RoomListIter];
+        }
+    }
+
+    /*
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     */
 
     // Update is called once per frame
     void Update()
