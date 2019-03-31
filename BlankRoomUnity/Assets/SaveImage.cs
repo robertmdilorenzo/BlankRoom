@@ -43,12 +43,14 @@ public class SaveImage : MonoBehaviour
     {
         MainPanel.SetActive(false);
         CreateRoomPanel.SetActive(true);
+        CreateRoomPanel.transform.Find("ErrorText").gameObject.GetComponent<Text>().text = "";
     }
 
     public void LoadSaveCopyPanel()
     {
         MainPanel.SetActive(false);
         SaveCopyPanel.SetActive(true);
+        SaveCopyPanel.transform.Find("ErrorText").gameObject.GetComponent<Text>().text = "";
     }
 
     public void LoadDeleteRoomPanel()
