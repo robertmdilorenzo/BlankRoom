@@ -4,6 +4,7 @@ using System.IO;
 using System;
 using System.Text.RegularExpressions;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SaveImage : MonoBehaviour
 {
@@ -12,25 +13,93 @@ public class SaveImage : MonoBehaviour
 
     public GameObject wall1, wall2, wall3, wall4, player, MainPanel, CreateRoomPanel, SaveCopyPanel, LoadRoomPanel, DeleteRoomPanel;
     public string currentRoomName;
-    //public static SaveImage thisObject { get; private set; }
+    public GameObject canvas;
 
     // Start is called before the first frame update
     void Start()
     {
-        //thisObject = this;
+        currentRoomName = "Room_1";
+
         wall1 = GameObject.Find("Plane") as GameObject;
         wall2 = GameObject.Find("Plane2") as GameObject;
         wall3 = GameObject.Find("Plane3") as GameObject;
         wall4 = GameObject.Find("Plane4") as GameObject;
         player = GameObject.Find("player") as GameObject;
-        MainPanel = GameObject.Find("MainPanel") as GameObject;
-        CreateRoomPanel = GameObject.Find("Create Room Panel") as GameObject;
-        SaveCopyPanel = GameObject.Find("Save Copy Panel") as GameObject;
-        LoadRoomPanel = GameObject.Find("Load Room Panel") as GameObject;
-        DeleteRoomPanel = GameObject.Find("Delete Room Panel") as GameObject;
+        MainPanel = canvas.transform.Find("MainPanel").gameObject;
+        CreateRoomPanel = canvas.transform.Find("Create Room Panel").gameObject;
+        SaveCopyPanel = canvas.transform.Find("Save Copy Panel").gameObject;
+        LoadRoomPanel = canvas.transform.Find("Load Room Panel").gameObject;
+        DeleteRoomPanel = canvas.transform.Find("Delete Room Panel").gameObject;
         LoadWallImages("Room_1");
+        
+        
         //GetRoomNames();//testing
         
+    }
+
+    public void LoadCreateNewRoomPanel()
+    {
+        MainPanel.SetActive(false);
+        CreateRoomPanel.SetActive(true);
+    }
+
+    public void LoadSaveCopyPanel()
+    {
+        MainPanel.SetActive(false);
+        SaveCopyPanel.SetActive(true);
+    }
+
+    public void LoadDeleteRoomPanel()
+    {
+        MainPanel.SetActive(false);
+        DeleteRoomPanel.SetActive(true);
+    }
+
+    public void LoadLoadRoomPanel()
+    {
+        MainPanel.SetActive(false);
+        LoadRoomPanel.SetActive(true);
+    }
+
+    public void BackToMainPanel()
+    {
+        MainPanel.SetActive(true);
+        CreateRoomPanel.SetActive(false);
+        LoadRoomPanel.SetActive(false);
+        DeleteRoomPanel.SetActive(false);
+        SaveCopyPanel.SetActive(false);
+
+    }
+
+    public void StartMenu()
+    {
+        MainPanel.SetActive(true);
+    }
+
+    public void CreateRoomOnClick()
+    {
+        string input_string = CreateRoomPanel.transform.Find("Input").Find("Text").gameObject.GetComponent<Text>().text;
+        if (input_string.Equals(""))
+        {
+            CreateRoomPanel.transform.Find("ErrorText").gameObject.GetComponent<Text>().text = "Input a Name";
+            return;
+        }
+        else if (RoomNameExists(input_string))
+        {
+            CreateRoomPanel.transform.Find("ErrorText").gameObject.GetComponent<Text>().text = "Name Exists, Choose Another";
+            return;
+        }
+        else
+        {
+            CreateNewRoom(input_string);
+            gameObject.GetComponent<SaveImage>().BackToMainPanel();
+            return;
+        }
+    }
+
+    public void SaveRoomOnClick()
+    {
+
     }
 
     // Update is called once per frame
@@ -61,12 +130,12 @@ public class SaveImage : MonoBehaviour
     public string[] GetRoomNames()
     {
         string curDirectory = System.IO.Directory.GetCurrentDirectory() + "/Assets/Resources";
-        string[] fileNames = Directory.GetFiles(curDirectory, "*_Player");
+        string[] fileNames = Directory.GetFiles(curDirectory, "*_Player.txt");
         Regex pattern = new Regex(".*Resources.{1}");
         for (int i = 0; i < fileNames.Length; i++)
         {
             //Remove .Player from file names
-            fileNames[i] = fileNames[i].Replace("_Player", "");
+            fileNames[i] = fileNames[i].Replace("_Player.txt", "");
             fileNames[i] = pattern.Replace(fileNames[i], "");
         }
 
@@ -112,15 +181,14 @@ public class SaveImage : MonoBehaviour
         wallNameMeta = wallName + ".meta";
         System.IO.File.Delete(@wallNameMeta);
         System.IO.File.Delete(@wallName);
-        wallName = curDirectory + RoomName + "_Player";
+        wallName = curDirectory + RoomName + "_Player.txt";
         wallNameMeta = wallName + ".meta";
         System.IO.File.Delete(@wallNameMeta);
         System.IO.File.Delete(@wallName);
     }
 
     public void LoadPlayerPosition(GameObject player, string filename) {
-        filename = "Room_1_Player"; //name will not be hard coded in full version
-        filename = System.IO.Directory.GetCurrentDirectory() + "/Assets/Resources/" + filename;
+        filename = System.IO.Directory.GetCurrentDirectory() + "/Assets/Resources/" + filename+"_Player.txt";
         StreamReader sr = new StreamReader(filename);
 
         Vector3 pos = new Vector3(float.Parse(sr.ReadLine()), float.Parse(sr.ReadLine()), float.Parse(sr.ReadLine()));
@@ -133,8 +201,7 @@ public class SaveImage : MonoBehaviour
     }
 
     public void SavePlayerPosition(GameObject player, string filename) {
-        filename = "Room_1_Player"; //Testing Line, name will not be hard coded in full version
-        filename = System.IO.Directory.GetCurrentDirectory() + "/Assets/Resources/" + filename;
+        filename = System.IO.Directory.GetCurrentDirectory() + "/Assets/Resources/" + filename+"_Player.txt";
         StreamWriter sw = new StreamWriter(filename);
         Transform pt = player.transform;
         sw.Write(pt.position.x + "\n");
@@ -148,14 +215,14 @@ public class SaveImage : MonoBehaviour
     }
 
     public void SaveAllWalls(string filename) {
-        gameObject.GetComponent<SaveImage>().SaveWallTextureAsPNG(wall1, filename);
-        gameObject.GetComponent<SaveImage>().SaveWallTextureAsPNG(wall2, filename);
-        gameObject.GetComponent<SaveImage>().SaveWallTextureAsPNG(wall3, filename);
-        gameObject.GetComponent<SaveImage>().SaveWallTextureAsPNG(wall4, filename);
+        gameObject.GetComponent<SaveImage>().SaveWallTextureAsPNG(wall1, filename+"_1.png");
+        gameObject.GetComponent<SaveImage>().SaveWallTextureAsPNG(wall2, filename+"_2.png");
+        gameObject.GetComponent<SaveImage>().SaveWallTextureAsPNG(wall3, filename+"_3.png");
+        gameObject.GetComponent<SaveImage>().SaveWallTextureAsPNG(wall4, filename+"_4.png");
     }
 
     public void SaveWallTextureAsPNG(GameObject wall, string filename) {
-        gameObject.GetComponent<SaveImage>().SaveTextureToFile(GetWallTexture(wall), filename+".png");
+        gameObject.GetComponent<SaveImage>().SaveTextureToFile(GetWallTexture(wall), filename);
     }
 
     public Texture2D GetWallTexture(GameObject wall) {
