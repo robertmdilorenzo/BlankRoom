@@ -20,7 +20,7 @@ public class SaveImage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentRoomName = "NewRoom";
+        currentRoomName = "%%%%%%%%%%%%%%%%%%%%";
         RoomListIter = 0;
         wall1 = GameObject.Find("Plane") as GameObject;
         wall2 = GameObject.Find("Plane2") as GameObject;
@@ -145,6 +145,11 @@ public class SaveImage : MonoBehaviour
 
     public void SaveRoomOnClick()
     {
+        if (currentRoomName.Equals("%%%%%%%%%%%%%%%%%%%%"))
+        {
+            gameObject.GetComponent<SaveImage>().LoadSaveCopyPanel();
+            return;
+        }
         gameObject.GetComponent<SaveImage>().SaveAllData(currentRoomName);
     }
 
