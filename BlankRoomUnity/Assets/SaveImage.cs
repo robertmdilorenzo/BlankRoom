@@ -39,7 +39,7 @@ public class SaveImage : MonoBehaviour
         LoadWallImages("Room_1");
         
         
-        GetRoomNames();//testing
+        //GetRoomNames();//testing
         
     }
 
@@ -228,6 +228,13 @@ public class SaveImage : MonoBehaviour
      * 
      * 
      * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
      */
 
     // Update is called once per frame
@@ -268,12 +275,12 @@ public class SaveImage : MonoBehaviour
         }
 
         //testing
-        StreamWriter sw = new StreamWriter(curDirectory + "/TestFileNames.txt");
+        /*StreamWriter sw = new StreamWriter(curDirectory + "/TestFileNames.txt");
         for (int i = 0; i < fileNames.Length; i++)
         {
             sw.Write(fileNames[i]);
         }
-        sw.Close();
+        sw.Close();*/
         //end of testing
 
         Array.Sort(fileNames);
