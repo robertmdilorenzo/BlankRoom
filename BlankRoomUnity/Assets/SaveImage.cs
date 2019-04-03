@@ -10,7 +10,7 @@ public class SaveImage : MonoBehaviour
 {
     public GameObject wall1, wall2, wall3, wall4, player, MainPanel, CreateRoomPanel, SaveCopyPanel, LoadRoomPanel, DeleteRoomPanel;
     public string currentRoomName;
-    public GameObject canvas, loadButton, deleteButton, loadButtonText, deleteButtonText, saveCopyText, createText, createInputField;
+    public GameObject canvas, loadButton, deleteButton, loadButtonText, deleteButtonText, saveCopyText, createText;
     public string[] currentRoomNameList;
     private GameObject[] scLetters, createLetters;
     private int RoomListIter;
@@ -30,7 +30,6 @@ public class SaveImage : MonoBehaviour
         MainPanel = canvas.transform.Find("MainPanel").gameObject;
         CreateRoomPanel = canvas.transform.Find("Create Room Panel").gameObject;
         createText = CreateRoomPanel.transform.Find("Input").Find("Text").gameObject;
-        createInputField = CreateRoomPanel.transform.Find("Input").gameObject;
         SaveCopyPanel = canvas.transform.Find("Save Copy Panel").gameObject;
         saveCopyText = SaveCopyPanel.transform.Find("Input").Find("Text").gameObject;
         LoadRoomPanel = canvas.transform.Find("Load Room Panel").gameObject;
