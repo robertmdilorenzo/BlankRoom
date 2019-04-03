@@ -10,7 +10,7 @@ public class SaveImage : MonoBehaviour
 {
     public GameObject wall1, wall2, wall3, wall4, player, MainPanel, CreateRoomPanel, SaveCopyPanel, LoadRoomPanel, DeleteRoomPanel;
     public string currentRoomName;
-    public GameObject canvas, loadButton, deleteButton, loadButtonText, deleteButtonText, saveCopyText, createText;
+    public GameObject canvas, loadButton, deleteButton, loadButtonText, deleteButtonText, saveCopyText, createText, UICamera, MainCamera;
     public string[] currentRoomNameList;
     private GameObject[] scLetters, createLetters;
     private int RoomListIter;
@@ -27,6 +27,9 @@ public class SaveImage : MonoBehaviour
         wall3 = GameObject.Find("Plane3") as GameObject;
         wall4 = GameObject.Find("Plane4") as GameObject;
         player = GameObject.Find("player") as GameObject;
+        MainCamera = GameObject.Find("Main Camera") as GameObject;
+        UICamera = GameObject.Find("UI Camera") as GameObject;
+        UICamera.SetActive(false);
         MainPanel = canvas.transform.Find("MainPanel").gameObject;
         CreateRoomPanel = canvas.transform.Find("Create Room Panel").gameObject;
         createText = CreateRoomPanel.transform.Find("Input").gameObject;
@@ -103,7 +106,19 @@ public class SaveImage : MonoBehaviour
 
     public void StartMenu()
     {
-        MainPanel.SetActive(true);
+        if(MainPanel.activeSelf || CreateRoomPanel.activeSelf || LoadRoomPanel.activeSelf || DeleteRoomPanel.activeSelf || SaveCopyPanel.activeSelf)
+        {
+            BackToMainPanel();
+            MainPanel.SetActive(false);
+            MainCamera.SetActive(true);
+            UICamera.SetActive(false);
+        }
+        else
+        {
+            MainPanel.SetActive(true);
+            UICamera.SetActive(true);
+            MainCamera.SetActive(false);
+        }
     }
 
     public void CreateRoomOnClick()
@@ -253,7 +268,10 @@ public class SaveImage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown("space"))
+        {
+            StartMenu();
+        }
     }
 
     public void CreateNewRoom(string RoomName)
