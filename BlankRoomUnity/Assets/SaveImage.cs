@@ -50,6 +50,7 @@ public class SaveImage : MonoBehaviour
 
     public void LoadCreateNewRoomPanel()
     {
+        //shift = false;
         MainPanel.SetActive(false);
         CreateRoomPanel.SetActive(true);
         CreateRoomPanel.transform.Find("ErrorText").gameObject.GetComponent<Text>().text = "";
@@ -57,6 +58,7 @@ public class SaveImage : MonoBehaviour
 
     public void LoadSaveCopyPanel()
     {
+        //shift = false;
         MainPanel.SetActive(false);
         SaveCopyPanel.SetActive(true);
         SaveCopyPanel.transform.Find("ErrorText").gameObject.GetComponent<Text>().text = "";
@@ -84,6 +86,7 @@ public class SaveImage : MonoBehaviour
         gameObject.GetComponent<SaveImage>().ValidateRoomListIter();
         MainPanel.SetActive(false);
         LoadRoomPanel.SetActive(true);
+        
         if (currentRoomNameList.Length < 1)
         {
             loadButtonText.GetComponent<Text>().text = "No Rooms";
