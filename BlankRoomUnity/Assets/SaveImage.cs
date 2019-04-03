@@ -109,7 +109,7 @@ public class SaveImage : MonoBehaviour
 
     public void CreateRoomOnClick()
     {
-        string input_string = CreateRoomPanel.transform.Find("Input").Find("Text").gameObject.GetComponent<Text>().text;
+        string input_string = createText.GetComponent<Text>().text;
         if (input_string.Equals(""))
         {
             CreateRoomPanel.transform.Find("ErrorText").gameObject.GetComponent<Text>().text = "Input a Name";
@@ -130,7 +130,7 @@ public class SaveImage : MonoBehaviour
 
     public void SaveAsOnClick()
     {
-        string input_string = SaveCopyPanel.transform.Find("Input").Find("Text").gameObject.GetComponent<Text>().text;
+        string input_string = saveCopyText.gameObject.GetComponent<Text>().text;
         if (input_string.Equals(""))
         {
             SaveCopyPanel.transform.Find("ErrorText").gameObject.GetComponent<Text>().text = "Input a Name";
@@ -1054,11 +1054,11 @@ public class SaveImage : MonoBehaviour
         }
         if (shift)
         {
-            createInputField.GetComponent<Text>().text += "A";
+            createText.GetComponent<Text>().text += "A";
         }
         else
         {
-            createInputField.GetComponent<Text>().text += "a";
+            createText.GetComponent<Text>().text += "a";
         }
     }
 
