@@ -28,8 +28,8 @@ public class SaveImage : MonoBehaviour
         wall4 = GameObject.Find("Plane4") as GameObject;
         player = GameObject.Find("player") as GameObject;
         MainCamera = GameObject.Find("Main Camera") as GameObject;
-        UICamera = GameObject.Find("UI Camera") as GameObject;
-        UICamera.SetActive(false);
+        //UICamera = GameObject.Find("UI Camera") as GameObject;
+        //UICamera.SetActive(false);
         MainPanel = canvas.transform.Find("MainPanel").gameObject;
         CreateRoomPanel = canvas.transform.Find("Create Room Panel").gameObject;
         createText = CreateRoomPanel.transform.Find("Input").gameObject;
@@ -106,18 +106,20 @@ public class SaveImage : MonoBehaviour
 
     public void StartMenu()
     {
-        if(MainPanel.activeSelf || CreateRoomPanel.activeSelf || LoadRoomPanel.activeSelf || DeleteRoomPanel.activeSelf || SaveCopyPanel.activeSelf)
+        if(canvas.activeSelf) //Menu is already open
         {
             BackToMainPanel();
-            MainPanel.SetActive(false);
-            MainCamera.SetActive(true);
-            UICamera.SetActive(false);
+            canvas.SetActive(false);
+            
         }
-        else
+        else //menu is closed
         {
-            MainPanel.SetActive(true);
-            UICamera.SetActive(true);
-            MainCamera.SetActive(false);
+            BackToMainPanel();
+            canvas.SetActive(true);
+            Vector3 rot = new Vector3(MainCamera.transform.rotation.x, MainCamera.transform.rotation.y, MainCamera.transform.rotation.z);
+
+            canvas.GetComponent<RectTransform>().position = new Vector3(wall1.transform.position.x, wall1.transform.position.y, wall1.transform.position.z - 4);
+            canvas.GetComponent<RectTransform>().rotation = Quaternion.Euler(rot.x, rot.y, rot.z);
         }
     }
 
@@ -361,7 +363,7 @@ public class SaveImage : MonoBehaviour
         player.transform.position = pos;
   
         Vector3 rot = new Vector3(float.Parse(sr.ReadLine()), float.Parse(sr.ReadLine()), float.Parse(sr.ReadLine()));
-        player.transform.rotation = Quaternion.Euler(rot.x, rot.y, rot.z); ;
+        player.transform.rotation = Quaternion.Euler(rot.x, rot.y, rot.z); 
 
         sr.Close();
     }
