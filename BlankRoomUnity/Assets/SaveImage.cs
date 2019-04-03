@@ -29,9 +29,9 @@ public class SaveImage : MonoBehaviour
         player = GameObject.Find("player") as GameObject;
         MainPanel = canvas.transform.Find("MainPanel").gameObject;
         CreateRoomPanel = canvas.transform.Find("Create Room Panel").gameObject;
-        createText = CreateRoomPanel.transform.Find("Input").Find("Text").gameObject;
+        createText = CreateRoomPanel.transform.Find("Input").gameObject;
         SaveCopyPanel = canvas.transform.Find("Save Copy Panel").gameObject;
-        saveCopyText = SaveCopyPanel.transform.Find("Input").Find("Text").gameObject;
+        saveCopyText = SaveCopyPanel.transform.Find("Input").gameObject;
         LoadRoomPanel = canvas.transform.Find("Load Room Panel").gameObject;
         DeleteRoomPanel = canvas.transform.Find("Delete Room Panel").gameObject;
         loadButton = LoadRoomPanel.transform.Find("LoadButton").gameObject;
