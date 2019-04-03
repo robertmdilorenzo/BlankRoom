@@ -14,6 +14,7 @@ public class SaveImage : MonoBehaviour
     public string[] currentRoomNameList;
     private GameObject[] scLetters, createLetters;
     private int RoomListIter;
+    private int UI_DISTANCE_FROM_WALL = 4;
     private Boolean shift;
 
     // Start is called before the first frame update
@@ -118,7 +119,7 @@ public class SaveImage : MonoBehaviour
             canvas.SetActive(true);
             Vector3 rot = new Vector3(MainCamera.transform.rotation.x, MainCamera.transform.rotation.y, MainCamera.transform.rotation.z);
 
-            canvas.GetComponent<RectTransform>().position = new Vector3(wall1.transform.position.x, wall1.transform.position.y, wall1.transform.position.z - 4);
+            canvas.GetComponent<RectTransform>().position = new Vector3(wall1.transform.position.x, wall1.transform.position.y, wall1.transform.position.z - UI_DISTANCE_FROM_WALL);
             canvas.GetComponent<RectTransform>().rotation = Quaternion.Euler(rot.x, rot.y, rot.z);
         }
     }
