@@ -1054,11 +1054,11 @@ public class SaveImage : MonoBehaviour
         }
         if (shift)
         {
-            createInputField.GetComponentInChildren<Text>().text += "A";
+            createInputField.GetComponent<Text>().text += "A";
         }
         else
         {
-            createInputField.GetComponentInChildren<Text>().text += "a";
+            createInputField.GetComponent<Text>().text += "a";
         }
     }
 
