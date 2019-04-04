@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Gvr;
 
 public class WallWriting : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class WallWriting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonUp(0))
+        if (GvrControllerInput.ClickButtonUp)
         {
             
             StartCoroutine(SaveTextureFile(MergeTexture()));

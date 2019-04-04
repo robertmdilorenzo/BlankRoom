@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Gvr;
 
 public class PenAlternate : MonoBehaviour
 {
@@ -9,20 +10,20 @@ public class PenAlternate : MonoBehaviour
     ParticleSystem myTrail;
     public Transform uvLocation;
    // Vector3 uvWorldPosition;
-    public GameObject renderPen;
-    ParticleSystem renderPenParticles;
+ 
     public Camera myCanvasCam;
     public RenderTexture renderTexture;
     public GameObject penMarkContainer;
+    public Canvas myCanvas;
+    
+    
     void Start()
     {
         
         
-        myTrail = gameObject.GetComponent<ParticleSystem>();
       
-        renderPenParticles = renderPen.GetComponent<ParticleSystem>();
        
-        canEmit(false);
+   
     }
 
     // Update is called once per frame
@@ -30,18 +31,16 @@ public class PenAlternate : MonoBehaviour
     {
         
         ObjectFollowCursor();
-        if (Input.GetMouseButton(0))
+        if (GvrControllerInput.ClickButton)
         {
             DoAction();
-        } else if (Input.GetMouseButtonUp(0))
-        {
-            canEmit(false);
-        }
+        } 
     }
 
     private void ObjectFollowCursor()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        
         Vector3 point = ray.origin + (ray.direction * distance);
         gameObject.transform.position = point;
     }
@@ -50,9 +49,9 @@ public class PenAlternate : MonoBehaviour
 
     void DoAction()
     {
-        
+       
         Vector3 uvWorldPosition = Vector3.zero;
-        canEmit(true);
+
         if (HitTestUVPosition(ref uvWorldPosition))
         {
             GameObject brush;
@@ -77,7 +76,12 @@ public class PenAlternate : MonoBehaviour
         Vector3 cursorPos = new Vector3(mousePos.x, mousePos.y, 0.0f);
 
         Ray cursorRay = Camera.main.ScreenPointToRay(cursorPos);
-        if(Physics.Raycast(cursorRay, out hit, 1000))
+
+        
+        Vector3 worldSpaceHitLocation = GvrPointerInputModule.Pointer.MaxPointerEndPoint;
+        Vector3 worldSpaceOrigin = GvrPointerInputModule.Pointer.PointerTransform.position;
+
+        if(Physics.Raycast(worldSpaceOrigin, worldSpaceHitLocation - worldSpaceOrigin, out hit, 1000))
         {
             MeshCollider meshCollider = hit.collider as MeshCollider;
             if(meshCollider == null || meshCollider.sharedMesh == null)
@@ -98,11 +102,7 @@ public class PenAlternate : MonoBehaviour
         }
     }
 
-    void canEmit(bool truefalse)
-    {
-        //myTrail.enableEmission = truefalse;
-       // renderPenParticles.enableEmission = truefalse;
-    }
+
 
 
 }
