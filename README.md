@@ -26,6 +26,7 @@ To run our demo, you need an android phone that is compatible with the Google Da
 
 <a name="navigation-system"></a>
 #### Navigation System
+The navigation system consisted of a few different components, some where so that the user could move freely and look all around others were for the remote controller in order to grab, release, move object, highlight object, and select. The gameObject component used was getComponent. This was important for using the remote in order to control the objects in the scene. It included the GvrControllerMain and GvrControllerPointer. This section also consisted of the functions in order for the user to navigate throughout the scenes.
 
 <a name="writing-system"></a>
 #### Writing System
