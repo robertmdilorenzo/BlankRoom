@@ -32,6 +32,7 @@ To run our demo, you need an android phone that is compatible with the Google Da
 
 <a name="file-io"></a>
 #### File I/O
+The image on the wall is saved as a png named "roomname"_1.png (with the name of the room the user writes) and the player position and rotation variables are saved in a text file called "roomname"_Player.txt. A UI can be accessed to: create a new room from scratch; save the current room; save a copy of the current room as a new room; load a saved room; delete a saved room; and clear the walls to start over.
 
 <a name="references"></a>
 #### References
