@@ -36,10 +36,12 @@ The navigation system consisted of a few different components, some where so tha
 
 <a name="writing-system"></a>
 #### Writing System
-
+The writing system setup is built from the use of a render camera to project pen marks in 3D space onto the 2D surface of the wall the user is writing on. Specifically there is a Main Wall, Render Wall, Main Camera, Render Camera, Google Daydream Controller and a container for the pen marks. Pen marks will be instantiated from the Resources/Prefabs directory in the Assets folder and will parent themselves to the pen container, which handles clearing and deleting them after they have been successfully merged into the surface texture of the Render Wall. The Main Wall's surface texture will be a Render Texture receiving the feed from the Render Camera. This texture MUST NOT be changed.
+ 
 <a name="file-io"></a>
 #### File I/O
 The image on the wall is saved as a png named "roomname"_1.png (with the name of the room the user writes) and the player position and rotation variables are saved in a text file called "roomname"_Player.txt. A UI can be accessed to: create a new room from scratch; save the current room; save a copy of the current room as a new room; load a saved room; delete a saved room; and clear the walls to start over.
 
 <a name="references"></a>
 #### References
+https://codeartist.mx/dynamic-texture-painting/
