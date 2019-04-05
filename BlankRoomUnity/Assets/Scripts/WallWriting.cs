@@ -35,6 +35,7 @@ public class WallWriting : MonoBehaviour
         Texture2D tex = new Texture2D(width, height, TextureFormat.RGB24, false);
         tex.ReadPixels(new Rect(0, 0, width, height), 0, 0);
         tex.Apply();
+        Debug.Log(tex.ToString());
         RenderTexture.active = null;
         baseMaterial.mainTexture = tex;
         Debug.Log("Merge Complete!");
