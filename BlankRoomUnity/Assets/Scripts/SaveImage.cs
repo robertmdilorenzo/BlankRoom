@@ -5,6 +5,7 @@ using System;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
+using Gvr;
 
 public class SaveImage : MonoBehaviour
 {
@@ -20,10 +21,12 @@ public class SaveImage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.LogError("GameObject attached to is " + gameObject.name);
+        canvas = GameObject.Find("Canvas");
         currentRoomName = "%%%%%%%%%%%%%%%%%%%%";
         RoomListIter = 0;
         shift = false;
-        wall1 = GameObject.Find("Plane") as GameObject;
+        wall1 = GameObject.Find("Plane (1)") as GameObject;
         //wall2 = GameObject.Find("Plane2") as GameObject;
         //wall3 = GameObject.Find("Plane3") as GameObject;
         //wall4 = GameObject.Find("Plane4") as GameObject;
@@ -33,9 +36,9 @@ public class SaveImage : MonoBehaviour
         //UICamera.SetActive(false);
         MainPanel = canvas.transform.Find("MainPanel").gameObject;
         CreateRoomPanel = canvas.transform.Find("Create Room Panel").gameObject;
-        createText = CreateRoomPanel.transform.Find("Input").gameObject;
+        createText = CreateRoomPanel.transform.Find("CreateRoomInput").gameObject;
         SaveCopyPanel = canvas.transform.Find("Save Copy Panel").gameObject;
-        saveCopyText = SaveCopyPanel.transform.Find("Input").gameObject;
+        saveCopyText = SaveCopyPanel.transform.Find("SaveCopyInput").gameObject;
         LoadRoomPanel = canvas.transform.Find("Load Room Panel").gameObject;
         DeleteRoomPanel = canvas.transform.Find("Delete Room Panel").gameObject;
         loadButton = LoadRoomPanel.transform.Find("LoadButton").gameObject;
@@ -43,7 +46,7 @@ public class SaveImage : MonoBehaviour
         deleteButton = DeleteRoomPanel.transform.Find("DeleteButton").gameObject;
         deleteButtonText = deleteButton.transform.Find("Text").gameObject;
         FindLettersForKeyboards();
-        gameObject.GetComponent<SaveImage>().MakeWallsBlank();
+        //gameObject.GetComponent<SaveImage>().MakeWallsBlank();
 
 
     }
@@ -274,8 +277,9 @@ public class SaveImage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("space"))
+        if (GvrControllerInput.AppButtonDown)
         {
+            GameObject.Find("Pen").GetComponent<PenAlternate>().SetWritingAbility();
             StartMenu();
         }
     }
@@ -1645,6 +1649,7 @@ public class SaveImage : MonoBehaviour
 
     private void FindLettersForKeyboards()
     {
+
         scLetters = new GameObject[36];
         scLetters[0] = SaveCopyPanel.transform.Find("A").Find("Text").gameObject;
         scLetters[1] = SaveCopyPanel.transform.Find("B").Find("Text").gameObject;

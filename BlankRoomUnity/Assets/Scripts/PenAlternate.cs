@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Gvr;
 
+
+//------------Credit for much of this script goes to Rodrigo Fernández, the creator of the tutorial I followed to write this code.
+//------------My work for this script was in implementing pieces of his tutorial, modifying them to work with what we needed 
+//------------and creating functionality for mobile and Google Daydream VR. https://codeartist.mx/dynamic-texture-painting/
+
+
+
+
 public class PenAlternate : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -15,7 +23,7 @@ public class PenAlternate : MonoBehaviour
     public RenderTexture renderTexture;
     public GameObject penMarkContainer;
     public Canvas myCanvas;
-    
+    bool canWrite;
     
     void Start()
     {
@@ -54,20 +62,18 @@ public class PenAlternate : MonoBehaviour
 
         if (HitTestUVPosition(ref uvWorldPosition))
         {
-            GameObject brush;
-            brush = (GameObject)Instantiate(Resources.Load("PaintBrushSprite"));
-            //renderPen.transform.localPosition = new Vector3(-uvWorldPosition.x, -uvWorldPosition.y);
-            
-            brush.transform.localPosition = uvWorldPosition; //The position of the brush (in the UVMap)
-            brush.transform.localScale = Vector3.one;//The size of the brush
-            brush.transform.parent = penMarkContainer.transform; //Add the brush to our container to be wiped later
+            if (true)
+            {
+                GameObject brush;
+                brush = (GameObject)Instantiate(Resources.Load("PaintBrushSprite"));
 
-        } else
-        {
-            Debug.LogError("Hit failed");
-        }
+                brush.transform.localPosition = uvWorldPosition; //The position of the brush (in the UVMap)
+                brush.transform.localScale = Vector3.one/ 2;//The size of the brush
+                brush.transform.parent = penMarkContainer.transform; //Add the brush to our container to be wiped later
+            }
+        } 
     }
-
+    
 
     bool HitTestUVPosition(ref Vector3 uvWorldPosition)
     {
@@ -92,7 +98,7 @@ public class PenAlternate : MonoBehaviour
             //Debug.Log(pixelUV);
             uvWorldPosition.x = pixelUV.x*10 - myCanvasCam.orthographicSize;
             uvWorldPosition.y = pixelUV.y*10  - myCanvasCam.orthographicSize;
-            uvWorldPosition.z = -2.0f;
+            uvWorldPosition.z = 0.1f + myCanvasCam.transform.position.z; ;
             
             return true;
         }
@@ -100,6 +106,11 @@ public class PenAlternate : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public bool SetWritingAbility()
+    {
+        return !canWrite;
     }
 
 
