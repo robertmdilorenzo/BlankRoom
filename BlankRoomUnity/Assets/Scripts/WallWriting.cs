@@ -19,15 +19,16 @@ public class WallWriting : MonoBehaviour
     {
         if (GvrControllerInput.ClickButtonUp)
         {
-            
-            StartCoroutine(SaveTextureFile(MergeTexture()));
+
+            //StartCoroutine(SaveTextureFile(MergeTexture()));
+            MergeTexture();
         }
     }
 
     Texture2D MergeTexture()
     {
 
-        Debug.Log("Merging...");
+        //Debug.Log("Merging...");
         RenderTexture.active = canvasTexture;
         int width = canvasTexture.width;
         int height = canvasTexture.height;
@@ -38,7 +39,7 @@ public class WallWriting : MonoBehaviour
         Debug.Log(tex.ToString());
         RenderTexture.active = null;
         baseMaterial.mainTexture = tex;
-        Debug.Log("Merge Complete!");
+        //Debug.Log("Merge Complete!");
 
         for(int i = 0; i < penMarkContainer.transform.childCount; i++)
         {

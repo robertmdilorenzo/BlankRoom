@@ -9,14 +9,16 @@ using Gvr;
 
 public class SaveImage : MonoBehaviour
 {
-    public GameObject wall1, wall2, wall3, wall4, player, MainPanel, CreateRoomPanel, SaveCopyPanel, LoadRoomPanel, DeleteRoomPanel;
+    public GameObject wall1, renderWall, wall3, wall4, player, MainPanel, CreateRoomPanel, SaveCopyPanel, LoadRoomPanel, DeleteRoomPanel;
     public string currentRoomName;
     public GameObject canvas, loadButton, deleteButton, loadButtonText, deleteButtonText, saveCopyText, createText, UICamera, MainCamera;
     public string[] currentRoomNameList;
+    public Material renderWallMaterial;
     private GameObject[] scLetters, createLetters;
     private int RoomListIter;
     private int UI_DISTANCE_FROM_WALL = 4;
     private Boolean shift;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -27,10 +29,10 @@ public class SaveImage : MonoBehaviour
         RoomListIter = 0;
         shift = false;
         wall1 = GameObject.Find("Plane (1)") as GameObject;
-        //wall2 = GameObject.Find("Plane2") as GameObject;
+        renderWall = GameObject.Find("Plane") as GameObject;
         //wall3 = GameObject.Find("Plane3") as GameObject;
         //wall4 = GameObject.Find("Plane4") as GameObject;
-        player = GameObject.Find("player") as GameObject;
+        player = GameObject.Find("Player") as GameObject;
         MainCamera = GameObject.Find("Main Camera") as GameObject;
         //UICamera = GameObject.Find("UI Camera") as GameObject;
         //UICamera.SetActive(false);
@@ -391,7 +393,7 @@ public class SaveImage : MonoBehaviour
     }
 
     public void SaveAllWalls(string filename) {
-        gameObject.GetComponent<SaveImage>().SaveWallTextureAsPNG(wall1, filename+"_1.png");
+        gameObject.GetComponent<SaveImage>().SaveWallTextureAsPNG(renderWall, filename+"_1.png");
         //gameObject.GetComponent<SaveImage>().SaveWallTextureAsPNG(wall2, filename+"_2.png");
         //gameObject.GetComponent<SaveImage>().SaveWallTextureAsPNG(wall3, filename+"_3.png");
         //gameObject.GetComponent<SaveImage>().SaveWallTextureAsPNG(wall4, filename+"_4.png");
@@ -402,7 +404,7 @@ public class SaveImage : MonoBehaviour
     }
 
     public Texture2D GetWallTexture(GameObject wall) {
-        return wall.GetComponent<Renderer>().material.mainTexture as Texture2D;
+        return renderWallMaterial.mainTexture as Texture2D;
     }
 
     public void SaveTextureToFile(Texture2D texture, string filename)
@@ -425,7 +427,7 @@ public class SaveImage : MonoBehaviour
 
     public void LoadWallImages(string RoomName) {
 
-        wall1.GetComponent<Renderer>().material.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile(RoomName + "_1.png");
+        renderWallMaterial.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile(RoomName + "_1.png");
         //wall2.GetComponent<Renderer>().material.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile(RoomName + "_2.png");
         //wall3.GetComponent<Renderer>().material.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile(RoomName + "_3.png");
         //wall4.GetComponent<Renderer>().material.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile(RoomName + "_4.png");
@@ -433,7 +435,7 @@ public class SaveImage : MonoBehaviour
 
     public void MakeWallsBlank()
     {
-        wall1.GetComponent<Renderer>().material.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile("BlankWallTexture.png");
+        renderWallMaterial.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile("BlankWallTexture.png");
         //wall2.GetComponent<Renderer>().material.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile("BlankWallTexture.png");
        // wall3.GetComponent<Renderer>().material.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile("BlankWallTexture.png");
         //wall4.GetComponent<Renderer>().material.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile("BlankWallTexture.png");
