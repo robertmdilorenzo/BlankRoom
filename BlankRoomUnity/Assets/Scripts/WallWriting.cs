@@ -9,9 +9,11 @@ public class WallWriting : MonoBehaviour
     public RenderTexture canvasTexture;
     public Material baseMaterial;
     public GameObject penMarkContainer;
+
+    GameObject renderWall;
     void Start()
     {
-        
+        renderWall = GameObject.Find("RenderWall").gameObject;
     }
 
     // Update is called once per frame
@@ -25,7 +27,7 @@ public class WallWriting : MonoBehaviour
         }
     }
 
-    Texture2D MergeTexture()
+    public Texture2D MergeTexture()
     {
 
         //Debug.Log("Merging...");
@@ -36,9 +38,11 @@ public class WallWriting : MonoBehaviour
         Texture2D tex = new Texture2D(width, height, TextureFormat.RGB24, false);
         tex.ReadPixels(new Rect(0, 0, width, height), 0, 0);
         tex.Apply();
-        Debug.Log(tex.ToString());
+        //Debug.Log(tex.ToString());
         RenderTexture.active = null;
         baseMaterial.mainTexture = tex;
+
+        renderWall.GetComponent<Renderer>().material.mainTexture = tex;
         //Debug.Log("Merge Complete!");
 
         for(int i = 0; i < penMarkContainer.transform.childCount; i++)

@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 129360452}
   - component: {fileID: 129360451}
   m_Layer: 0
-  m_Name: Plane (1)
+  m_Name: Main Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -801,7 +801,7 @@ GameObject:
   - component: {fileID: 1384443175}
   - component: {fileID: 1384443174}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: RenderWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -28,8 +28,8 @@ public class SaveImage : MonoBehaviour
         currentRoomName = "%%%%%%%%%%%%%%%%%%%%";
         RoomListIter = 0;
         shift = false;
-        wall1 = GameObject.Find("Plane (1)") as GameObject;
-        renderWall = GameObject.Find("Plane") as GameObject;
+        wall1 = GameObject.Find("MainWall") as GameObject;
+        renderWall = GameObject.Find("RenderWall") as GameObject;
         //wall3 = GameObject.Find("Plane3") as GameObject;
         //wall4 = GameObject.Find("Plane4") as GameObject;
         player = GameObject.Find("Player") as GameObject;
@@ -427,7 +427,8 @@ public class SaveImage : MonoBehaviour
 
     public void LoadWallImages(string RoomName) {
 
-        renderWallMaterial.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile(RoomName + "_1.png");
+        //renderWallMaterial.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile(RoomName + "_1.png");
+        renderWall.GetComponent<Renderer>().material.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile(RoomName + "_1.png");
         //wall2.GetComponent<Renderer>().material.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile(RoomName + "_2.png");
         //wall3.GetComponent<Renderer>().material.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile(RoomName + "_3.png");
         //wall4.GetComponent<Renderer>().material.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile(RoomName + "_4.png");
@@ -435,9 +436,17 @@ public class SaveImage : MonoBehaviour
 
     public void MakeWallsBlank()
     {
-        renderWallMaterial.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile("BlankWallTexture.png");
+         renderWall.GetComponent<Renderer>().material.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile("BlankWallTexture.png");
+         GameObject.Find("Player").transform.Find("Pen").GetComponent<WallWriting>().MergeTexture();
+        //Material temp = new Material(Shader.Find("Mobile/Unlit (Supports Lightmap)"));
+        //Debug.Log(temp.ToString());
+        //temp.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile("BlankWallTexture.png");
+       
+        //renderWallMaterial.mainTexture = temp.mainTexture;
+        //Debug.Log(temp.mainTexture == renderWallMaterial.mainTexture);
+
         //wall2.GetComponent<Renderer>().material.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile("BlankWallTexture.png");
-       // wall3.GetComponent<Renderer>().material.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile("BlankWallTexture.png");
+        // wall3.GetComponent<Renderer>().material.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile("BlankWallTexture.png");
         //wall4.GetComponent<Renderer>().material.mainTexture = gameObject.GetComponent<SaveImage>().LoadTextureFromFile("BlankWallTexture.png");
     }
 
